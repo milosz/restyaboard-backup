@@ -81,7 +81,7 @@ if [ "${param_board_address_defined}" = true ] && \
                              "user_id": '${user_id}',
                              "background_color": "'${board_background_color}'"
                            }' \
-                      "https://board.fishsilentcruise.space/api/v1/boards.json?token=${access_token}" | \
+                      "${param_board_address}/api/v1/boards.json?token=${access_token}" | \
                  jq -r '.id')
 
   echo "Created board \"${board_name}\" - ${param_board_address}/#/board/${new_board_id}"
@@ -106,7 +106,7 @@ if [ "${param_board_address_defined}" = true ] && \
                               "position": '${list_position}',
                               "color": "'${list_color}'"
                             }' \
-                       "https://board.fishsilentcruise.space/api/v1/boards/${new_board_id}/lists.json?token=${access_token}" | \
+                       "${param_board_address}/api/v1/boards/${new_board_id}/lists.json?token=${access_token}" | \
                   jq -r '.id')
 
     echo " + Created list \"${list_name}\""
@@ -140,7 +140,7 @@ if [ "${param_board_address_defined}" = true ] && \
                                   "color": "'"${card_color}"'",
                                   "is_archived": "'"${card_is_archived}"'"
                                 }' \
-                           "https://board.fishsilentcruise.space/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards.json?token=${access_token}" | \
+                           "${param_board_address}/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards.json?token=${access_token}" | \
                       jq -r '.id')
 
         echo "   - Added card \"${card_name}\"" 
@@ -172,7 +172,7 @@ if [ "${param_board_address_defined}" = true ] && \
                                           "card_id": '${new_card_id}',
                                           "name": "'"${card_label_names}"'"
                                         }' \
-                                   "https://board.fishsilentcruise.space/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards/${new_card_id}/labels.json?token=${access_token}" | \
+                                   "${param_board_address}/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards/${new_card_id}/labels.json?token=${access_token}" | \
                               jq -r '.id')
 
           echo "     @${card_label_names}" | sed "s/,/, /g"
@@ -197,7 +197,7 @@ if [ "${param_board_address_defined}" = true ] && \
                                                 "position": '${card_checklist_position}',
                                                 "name": "'"${card_checklist_name}"'"
                                               }' \
-                                         "https://board.fishsilentcruise.space/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards/${new_card_id}/checklists.json?token=${access_token}"  | \
+                                         "${param_board_address}/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards/${new_card_id}/checklists.json?token=${access_token}"  | \
                                     jq -r '.id')
 
             echo "      + Checklist $card_checklist_name"
@@ -224,7 +224,7 @@ if [ "${param_board_address_defined}" = true ] && \
                                                          "position": '${card_checklist_item_position}',
                                                          "name": "'"${card_checklist_item_name}"'"
                                                        }' \
-                                                  "https://board.fishsilentcruise.space/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards/${new_card_id}/checklists/${new_card_checklist_id}/items.json?token=${access_token}"  | \
+                                                  "${param_board_address}/api/v1/boards/${new_board_id}/lists/${new_list_id}/cards/${new_card_id}/checklists/${new_card_checklist_id}/items.json?token=${access_token}"  | \
                                               jq -r '.id')
 
                 echo "        - $card_checklist_item_name"
